@@ -1,4 +1,4 @@
-@mixin btn($bg-color: #e2e2e2) {
+@mixin btn($bg-color: #e2e2e2) {   //default argument
     text-decoration: none;
     cursor: pointer;
     display: inline-block;
@@ -8,15 +8,15 @@
     background-color: $bg-color;
   }
   
-  .btn {
-    @include btn;
+  .btn {       
+    @include btn;   //no arg given so default arg will be applied
   }
   
   @each $key, $val in $colors {
     .btn-#{$key} {
       @include btn($val);
       &:hover {
-        background-color: lighten($val, 5);
+        background-color: lighten($val, 5);    //builtin function that lighten color by specific %
       }
     }
     .btn-outlined-#{$key} {
@@ -26,5 +26,14 @@
         background-color: $val;
       }
     }
-  }
   
+  
+  .btn-complement-#{$key} {
+    @include btn($val);
+    color: light-comp($val);
+    &:hover {
+      color: $val;
+      background-color: light-comp($val);
+    }
+  }
+  }
