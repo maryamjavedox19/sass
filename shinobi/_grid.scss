@@ -2,6 +2,16 @@
 
 $grid-columns: 12;
 
+$grid-gaps: (
+  "0": 0,
+  "1": 10px,
+  "2": 20px,
+  "3": 30px,
+);
+
+$layout-values: flex-start, flex-end, center, space-between, space-around;   //justify content properties
+
+
 // base layout classes
 .container {
   width: 100%;
@@ -14,6 +24,25 @@ $grid-columns: 12;
   display: flex;
   flex-flow: row wrap;    //will take row down if screen get smaller
 }
+
+// grid gaps
+@each $key, $val in $grid-gaps {
+    .gap-#{$key} > * {   //giving class to direct childs
+      padding: $val;
+    }
+    .gap-#{$key} {
+      margin-left: -$val;     //removing left and right padding since we want gap between boxes/grid only
+      margin-right: -$val;
+    }
+  }
+
+  // justify content classes
+@each $val in $layout-values {
+    .justify-#{$val} {
+      justify-content: $val;
+    }
+  }
+    
 
 // col classes
 @include xs {
